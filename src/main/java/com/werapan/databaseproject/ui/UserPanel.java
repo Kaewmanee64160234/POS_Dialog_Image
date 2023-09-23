@@ -7,6 +7,7 @@ package com.werapan.databaseproject.ui;
 import com.werapan.databaseproject.model.User;
 import com.werapan.databaseproject.service.UserService;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -15,8 +16,8 @@ import javax.swing.table.AbstractTableModel;
  */
 public class UserPanel extends javax.swing.JFrame {
 
-    private  UserService userService;
-    private  List<User> list;
+    private UserService userService;
+    private List<User> list;
     private User editedUser;
 
     /**
@@ -363,13 +364,13 @@ public class UserPanel extends javax.swing.JFrame {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         setFormToObject();
-        if(editedUser.getId()<0){
-             userService.addNew(editedUser);
-             
-        }else{
+        if (editedUser.getId() < 0) {
+            userService.addNew(editedUser);
+
+        } else {
             userService.updateUser(editedUser);
         }
-       
+
         clearForm();
         enableForm(false);
         refreshTable();
@@ -384,7 +385,7 @@ public class UserPanel extends javax.swing.JFrame {
 
     private void setFormToObject() {
         // private void FormToObject() {
-        
+
         String login = txtLogin.getText();
         String name = txtName.getText();
         String password = new String(txtPassword.getPassword());
@@ -401,7 +402,15 @@ public class UserPanel extends javax.swing.JFrame {
     }
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-
+        int selectedIndex = tableUser.getSelectedRow();
+        if (selectedIndex >= 0) {
+            editedUser = list.get(selectedIndex);
+            int input = JOptionPane.showConfirmDialog(this, "Do you want to delete?", "Select an Option...", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
+            if (input == 0) {
+                userService.deleteUser(editedUser);
+            }
+        }
+        refreshTable();
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnAddNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddNewActionPerformed
@@ -429,7 +438,7 @@ public class UserPanel extends javax.swing.JFrame {
     private void btnEidtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEidtActionPerformed
         int selectedindex = tableUser.getSelectedRow();
         System.out.println(selectedindex);
-        if(selectedindex >=0){
+        if (selectedindex >= 0) {
             editedUser = list.get(selectedindex);
             setObjectForm();
             enableForm(true);

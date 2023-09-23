@@ -39,4 +39,9 @@ public class UserService {
         return userDao.update(editedUser);
     }
 
+    public int deleteUser(User editedUser) {
+        UserDao userdao = new UserDao();
+        return userdao.delete(editedUser);
+    }
+
 }
