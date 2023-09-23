@@ -15,8 +15,8 @@ import javax.swing.table.AbstractTableModel;
  */
 public class UserPanel extends javax.swing.JFrame {
 
-    private final UserService userService;
-    private final List<User> list;
+    private  UserService userService;
+    private  List<User> list;
     private User editedUser;
 
     /**
@@ -83,6 +83,7 @@ public class UserPanel extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         labelId = new javax.swing.JLabel();
@@ -143,6 +144,7 @@ public class UserPanel extends javax.swing.JFrame {
 
         comboRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "User", "Admin" }));
 
+        buttonGroup1.add(radioMale);
         radioMale.setSelected(true);
         radioMale.setText("Male");
         radioMale.addActionListener(new java.awt.event.ActionListener() {
@@ -151,6 +153,7 @@ public class UserPanel extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(radioFemale);
         radioFemale.setText("Female");
         radioFemale.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -359,8 +362,37 @@ public class UserPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-
+        setFormToObject();
+        userService.addNew(editedUser);
+        clearForm();
+        enableForm(false);
+        refreshTable();
     }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void refreshTable() {
+        list = userService.getuser();
+        tableUser.revalidate();
+        tableUser.repaint();
+//    }
+    }
+
+    private void setFormToObject() {
+        // private void FormToObject() {
+        
+        String login = txtLogin.getText();
+        String name = txtName.getText();
+        String password = new String(txtPassword.getPassword());
+        String gander = "M";
+        if (radioFemale.isSelected()) {
+            gander = "F";
+        }
+        int role = comboRole.getSelectedIndex();
+        editedUser.setLogin(login);
+        editedUser.setName(name);
+        editedUser.setPassword(password);
+        editedUser.setGender(gander);
+        editedUser.setRole(role);
+    }
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
 
@@ -381,10 +413,11 @@ public class UserPanel extends javax.swing.JFrame {
             radioMale.setSelected(true);
         } else {
             radioFemale.setSelected(true);
-            
+
         }
         comboRole.setSelectedIndex(editedUser.getRole());
     }
+
 
     private void btnEidtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEidtActionPerformed
 
@@ -431,6 +464,7 @@ public class UserPanel extends javax.swing.JFrame {
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEidt;
     private javax.swing.JButton btnSave;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> comboRole;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel6;

@@ -29,4 +29,9 @@ public class UserService {
 
     }
 
+    public User addNew(User editedUser) {
+       UserDao userDao = new UserDao();
+       return userDao.save(editedUser);
+    }
+
 }
