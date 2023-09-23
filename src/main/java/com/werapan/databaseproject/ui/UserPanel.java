@@ -363,7 +363,13 @@ public class UserPanel extends javax.swing.JFrame {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         setFormToObject();
-        userService.addNew(editedUser);
+        if(editedUser.getId()<0){
+             userService.addNew(editedUser);
+             
+        }else{
+            userService.updateUser(editedUser);
+        }
+       
         clearForm();
         enableForm(false);
         refreshTable();
@@ -399,13 +405,14 @@ public class UserPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnAddNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddNewActionPerformed
+        editedUser = new User();
         setObjectForm();
         enableForm(true);
 
     }//GEN-LAST:event_btnAddNewActionPerformed
 
     private void setObjectForm() {
-        editedUser = new User();
+//        editedUser = new User();
         txtLogin.setText(editedUser.getLogin());
         txtName.setText(editedUser.getName());
         txtPassword.setText(editedUser.getPassword());
@@ -420,7 +427,13 @@ public class UserPanel extends javax.swing.JFrame {
 
 
     private void btnEidtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEidtActionPerformed
-
+        int selectedindex = tableUser.getSelectedRow();
+        System.out.println(selectedindex);
+        if(selectedindex >=0){
+            editedUser = list.get(selectedindex);
+            setObjectForm();
+            enableForm(true);
+        }
     }//GEN-LAST:event_btnEidtActionPerformed
 
     /**
