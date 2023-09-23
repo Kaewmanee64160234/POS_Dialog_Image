@@ -103,7 +103,7 @@ public class UserDao implements Dao<User> {
 
     public List<User> getAll(String order) {
         ArrayList<User> list = new ArrayList();
-        String sql = "SELECT * FROM user  ORDER BY" + order;
+        String sql = "SELECT * FROM user  ORDER BY " + order;
         Connection conn = DatabaseHelper.getConnect();
         try {
             Statement stmt = conn.createStatement();
