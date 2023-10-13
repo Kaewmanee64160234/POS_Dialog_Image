@@ -1,6 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 package com.werapan.databaseproject.ui;
 
@@ -8,72 +8,22 @@ import com.werapan.databaseproject.model.User;
 import com.werapan.databaseproject.service.UserService;
 import java.util.List;
 import javax.swing.JOptionPane;
-import javax.swing.table.AbstractTableModel;
 
 /**
  *
  * @author USER
  */
-public class UserPanel extends javax.swing.JFrame {
-
-    private UserService userService;
+public class UserDialog extends javax.swing.JDialog {
+ private UserService userService;
     private List<User> list;
     private User editedUser;    
 
-
     /**
-     * Creates new form UserPanel
+     * Creates new form UserDialog
      */
-    public UserPanel() {
+    public UserDialog(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
-        userService = new UserService();
-        list = userService.getuser();
-        System.out.println(list);
-        tableUser.setModel(new AbstractTableModel() {
-            String[] columnName = {"ID", "Login", "Name", "Password", "Gender", "Role"};
-
-            @Override
-            public String getColumnName(int column) {
-                return columnName[column];
-            }
-
-            @Override
-            public int getRowCount() {
-//                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-                return list.size();
-            }
-
-            @Override
-            public int getColumnCount() {
-//                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-                return 6;
-            }
-
-            @Override
-            public Object getValueAt(int rowIndex, int columnIndex) {
-                User user = list.get(rowIndex);
-                switch (columnIndex) {
-                    case 0:
-                        return user.getId();
-                    case 1:
-                        return user.getLogin();
-                    case 2:
-                        return user.getName();
-                    case 3:
-                        return user.getPassword();
-
-                    case 4:
-                        return user.getGender();
-                    case 5:
-                        return user.getRole();
-                    default:
-                        return "Unknow";
-                }
-//throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-
-        });
-        enableForm(false);
     }
 
     /**
@@ -85,7 +35,7 @@ public class UserPanel extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
+        jFrame1 = new javax.swing.JFrame();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         labelId = new javax.swing.JLabel();
@@ -107,8 +57,23 @@ public class UserPanel extends javax.swing.JFrame {
         btnDelete = new javax.swing.JButton();
         btnAddNew = new javax.swing.JButton();
         btnEidt = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        labelId1 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        txtLogin1 = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        txtName1 = new javax.swing.JTextField();
+        txtPassword1 = new javax.swing.JPasswordField();
+        jLabel13 = new javax.swing.JLabel();
+        comboRole1 = new javax.swing.JComboBox<>();
+        radioMale1 = new javax.swing.JRadioButton();
+        radioFemale1 = new javax.swing.JRadioButton();
+        btnClear1 = new javax.swing.JButton();
+        btnSave1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jFrame1.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel3.setBackground(new java.awt.Color(204, 255, 255));
 
@@ -146,7 +111,6 @@ public class UserPanel extends javax.swing.JFrame {
 
         comboRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "User", "Admin" }));
 
-        buttonGroup1.add(radioMale);
         radioMale.setSelected(true);
         radioMale.setText("Male");
         radioMale.addActionListener(new java.awt.event.ActionListener() {
@@ -155,7 +119,6 @@ public class UserPanel extends javax.swing.JFrame {
             }
         });
 
-        buttonGroup1.add(radioFemale);
         radioFemale.setText("Female");
         radioFemale.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -317,26 +280,180 @@ public class UserPanel extends javax.swing.JFrame {
                 .addGap(241, 241, 241))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
+        jFrame1.getContentPane().setLayout(jFrame1Layout);
+        jFrame1Layout.setHorizontalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jFrame1Layout.createSequentialGroup()
+                .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(jFrame1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        jFrame1Layout.setVerticalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jFrame1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10))
+        );
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jPanel5.setBackground(new java.awt.Color(204, 255, 255));
+
+        jLabel2.setText("ID : ");
+
+        labelId1.setText("-1");
+
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel10.setText("Login:");
+        jLabel10.setToolTipText("");
+
+        txtLogin1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtLogin1ActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel11.setText("Name :");
+        jLabel11.setToolTipText("");
+
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel12.setText("Password:");
+        jLabel12.setToolTipText("");
+
+        txtName1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtName1ActionPerformed(evt);
+            }
+        });
+
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel13.setText("Role:");
+        jLabel13.setToolTipText("");
+
+        comboRole1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "User", "Admin" }));
+
+        radioMale1.setSelected(true);
+        radioMale1.setText("Male");
+        radioMale1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioMale1ActionPerformed(evt);
+            }
+        });
+
+        radioFemale1.setText("Female");
+        radioFemale1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioFemale1ActionPerformed(evt);
+            }
+        });
+
+        btnClear1.setBackground(new java.awt.Color(255, 153, 153));
+        btnClear1.setText("Clear");
+        btnClear1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClear1ActionPerformed(evt);
+            }
+        });
+
+        btnSave1.setBackground(new java.awt.Color(153, 255, 153));
+        btnSave1.setText("Save");
+        btnSave1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSave1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labelId1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(comboRole1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtLogin1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(28, 28, 28)
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(69, 69, 69)
+                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtPassword1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtName1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(radioMale1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(radioFemale1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(118, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnSave1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnClear1)
+                .addGap(14, 14, 14))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(labelId1)
+                    .addComponent(jLabel10)
+                    .addComponent(txtLogin1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11)
+                    .addComponent(txtName1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(txtPassword1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(radioMale1)
+                    .addComponent(radioFemale1))
+                .addGap(24, 24, 24)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(comboRole1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSave1)
+                    .addComponent(btnClear1))
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -378,31 +495,6 @@ public class UserPanel extends javax.swing.JFrame {
         refreshTable();
     }//GEN-LAST:event_btnSaveActionPerformed
 
-    private void refreshTable() {
-        list = userService.getuser();
-        tableUser.revalidate();
-        tableUser.repaint();
-//    }
-    }
-
-    private void setFormToObject() {
-        // private void FormToObject() {
-
-        String login = txtLogin.getText();
-        String name = txtName.getText();
-        String password = new String(txtPassword.getPassword());
-        String gander = "M";
-        if (radioFemale.isSelected()) {
-            gander = "F";
-        }
-        int role = comboRole.getSelectedIndex();
-        editedUser.setLogin(login);
-        editedUser.setName(name);
-        editedUser.setPassword(password);
-        editedUser.setGender(gander);
-        editedUser.setRole(role);
-    }
-
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         int selectedIndex = tableUser.getSelectedRow();
         if (selectedIndex >= 0) {
@@ -419,23 +511,7 @@ public class UserPanel extends javax.swing.JFrame {
         editedUser = new User();
         setObjectForm();
         enableForm(true);
-
     }//GEN-LAST:event_btnAddNewActionPerformed
-
-    private void setObjectForm() {
-//        editedUser = new User();
-        txtLogin.setText(editedUser.getLogin());
-        txtName.setText(editedUser.getName());
-        txtPassword.setText(editedUser.getPassword());
-        if (editedUser.getGender().equals("M")) {
-            radioMale.setSelected(true);
-        } else {
-            radioFemale.setSelected(true);
-
-        }
-        comboRole.setSelectedIndex(editedUser.getRole());
-    }
-
 
     private void btnEidtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEidtActionPerformed
         int selectedindex = tableUser.getSelectedRow();
@@ -446,6 +522,42 @@ public class UserPanel extends javax.swing.JFrame {
             enableForm(true);
         }
     }//GEN-LAST:event_btnEidtActionPerformed
+
+    private void txtLogin1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLogin1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtLogin1ActionPerformed
+
+    private void txtName1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtName1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtName1ActionPerformed
+
+    private void radioMale1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioMale1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_radioMale1ActionPerformed
+
+    private void radioFemale1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioFemale1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_radioFemale1ActionPerformed
+
+    private void btnClear1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClear1ActionPerformed
+        // TODO add your handling code here:
+        clearForm();
+        enableForm(false);
+    }//GEN-LAST:event_btnClear1ActionPerformed
+
+    private void btnSave1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSave1ActionPerformed
+        setFormToObject();
+        if (editedUser.getId() < 0) {
+            userService.addNew(editedUser);
+
+        } else {
+            userService.updateUser(editedUser);
+        }
+
+        clearForm();
+        enableForm(false);
+        refreshTable();
+    }//GEN-LAST:event_btnSave1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -464,49 +576,61 @@ public class UserPanel extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UserPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UserPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UserPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UserPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UserPanel().setVisible(true);
+                UserDialog dialog = new UserDialog(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }
+     private void setObjectForm() {
+//        editedUser = new User();
+        txtLogin.setText(editedUser.getLogin());
+        txtName.setText(editedUser.getName());
+        txtPassword.setText(editedUser.getPassword());
+        if (editedUser.getGender().equals("M")) {
+            radioMale.setSelected(true);
+        } else {
+            radioFemale.setSelected(true);
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAddNew;
-    private javax.swing.JButton btnClear;
-    private javax.swing.JButton btnDelete;
-    private javax.swing.JButton btnEidt;
-    private javax.swing.JButton btnSave;
-    private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JComboBox<String> comboRole;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel labelId;
-    private javax.swing.JRadioButton radioFemale;
-    private javax.swing.JRadioButton radioMale;
-    private javax.swing.JTable tableUser;
-    private javax.swing.JTextField txtLogin;
-    private javax.swing.JTextField txtName;
-    private javax.swing.JPasswordField txtPassword;
-    // End of variables declaration//GEN-END:variables
-  private void clearForm() {
+        }
+        comboRole.setSelectedIndex(editedUser.getRole());
+    }
+       private void setFormToObject() {
+        // private void FormToObject() {
+
+        String login = txtLogin.getText();
+        String name = txtName.getText();
+        String password = new String(txtPassword.getPassword());
+        String gander = "M";
+        if (radioFemale.isSelected()) {
+            gander = "F";
+        }
+        int role = comboRole.getSelectedIndex();
+        editedUser.setLogin(login);
+        editedUser.setName(name);
+        editedUser.setPassword(password);
+        editedUser.setGender(gander);
+        editedUser.setRole(role);
+    }
+ private void clearForm() {
         txtLogin.setText("");
         txtName.setText("");
         txtPassword.setText("");
@@ -528,5 +652,50 @@ public class UserPanel extends javax.swing.JFrame {
         btnSave.setEnabled(isEnable);
         txtLogin.requestFocus();
     }
+     private void refreshTable() {
+        list = userService.getuser();
+        tableUser.revalidate();
+        tableUser.repaint();
+//    }
+    }
 
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddNew;
+    private javax.swing.JButton btnClear;
+    private javax.swing.JButton btnClear1;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnEidt;
+    private javax.swing.JButton btnSave;
+    private javax.swing.JButton btnSave1;
+    private javax.swing.JComboBox<String> comboRole;
+    private javax.swing.JComboBox<String> comboRole1;
+    private javax.swing.JFrame jFrame1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel labelId;
+    private javax.swing.JLabel labelId1;
+    private javax.swing.JRadioButton radioFemale;
+    private javax.swing.JRadioButton radioFemale1;
+    private javax.swing.JRadioButton radioMale;
+    private javax.swing.JRadioButton radioMale1;
+    private javax.swing.JTable tableUser;
+    private javax.swing.JTextField txtLogin;
+    private javax.swing.JTextField txtLogin1;
+    private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtName1;
+    private javax.swing.JPasswordField txtPassword;
+    private javax.swing.JPasswordField txtPassword1;
+    // End of variables declaration//GEN-END:variables
 }
