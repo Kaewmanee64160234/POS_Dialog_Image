@@ -82,7 +82,9 @@ public class UserPanel extends javax.swing.JFrame {
                     case 0:
                          ImageIcon icon =  new ImageIcon("./user_" + user.getId() + ".png");
                             Image image = icon.getImage();
-                            Image newImage = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+                            int width = image.getWidth(null);
+                            int height = image.getHeight(null);
+                            Image newImage = image.getScaledInstance( (int) ((int) 100*((float)width/height)), 100, Image.SCALE_SMOOTH);
                             ImageIcon newIcon = new ImageIcon(newImage);
                             return newIcon;
                     case 1:
