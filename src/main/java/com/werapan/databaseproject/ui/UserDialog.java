@@ -563,29 +563,29 @@ public class UserDialog extends javax.swing.JDialog {
 
     private void setObjectForm() {
 //        editedUser = new User();
-        txtLogin.setText(editedUser.getLogin());
-        txtName.setText(editedUser.getName());
-        txtPassword.setText(editedUser.getPassword());
+        txtLogin1.setText(editedUser.getLogin());
+        txtName1.setText(editedUser.getName());
+        txtPassword1.setText(editedUser.getPassword());
         if (editedUser.getGender().equals("M")) {
-            radioMale.setSelected(true);
+            radioMale1.setSelected(true);
         } else {
-            radioFemale.setSelected(true);
+            radioFemale1.setSelected(true);
 
         }
-        comboRole.setSelectedIndex(editedUser.getRole());
+        comboRole1.setSelectedIndex(editedUser.getRole());
     }
 
     private void setFormToObject() {
         // private void FormToObject() {
 
-        String login = txtLogin.getText();
-        String name = txtName.getText();
-        String password = new String(txtPassword.getPassword());
+        String login = txtLogin1.getText();
+        String name = txtName1.getText();
+        String password = new String(txtPassword1.getPassword());
         String gander = "M";
-        if (radioFemale.isSelected()) {
+        if (radioFemale1.isSelected()) {
             gander = "F";
         }
-        int role = comboRole.getSelectedIndex();
+        int role = comboRole1.getSelectedIndex();
         editedUser.setLogin(login);
         editedUser.setName(name);
         editedUser.setPassword(password);
@@ -594,13 +594,13 @@ public class UserDialog extends javax.swing.JDialog {
     }
 
     private void clearForm() {
-        txtLogin.setText("");
-        txtName.setText("");
-        txtPassword.setText("");
-        comboRole.setSelectedIndex(0);
-        radioMale.setSelected(true);
-        txtLogin.requestFocus();
-        labelId.setText("-1");
+        txtLogin1.setText("");
+        txtName1.setText("");
+        txtPassword1.setText("");
+        comboRole1.setSelectedIndex(0);
+        radioMale1.setSelected(true);
+        txtLogin1.requestFocus();
+        labelId1.setText("-1");
     }
 
     
