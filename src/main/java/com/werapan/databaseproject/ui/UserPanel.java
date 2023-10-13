@@ -7,6 +7,8 @@ package com.werapan.databaseproject.ui;
 import com.werapan.databaseproject.model.User;
 import com.werapan.databaseproject.service.UserService;
 import java.awt.Frame;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -21,8 +23,7 @@ public class UserPanel extends javax.swing.JFrame {
 
     private UserService userService;
     private List<User> list;
-    private User editedUser;    
-
+    private User editedUser;
 
     /**
      * Creates new form UserPanel
@@ -420,11 +421,22 @@ public class UserPanel extends javax.swing.JFrame {
 
     private void btnAddNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddNewActionPerformed
         editedUser = new User();
+        openUserDialog();
+
+    }//GEN-LAST:event_btnAddNewActionPerformed
+
+    private void openUserDialog() {
         JFrame frame = (JFrame) SwingUtilities.getRoot(this);
         UserDialog userDialog = new UserDialog(frame, editedUser);
         userDialog.setVisible(true);
+        userDialog.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                refreshTable();
+            }
 
-    }//GEN-LAST:event_btnAddNewActionPerformed
+        });
+    }
 
     private void setObjectForm() {
 //        editedUser = new User();
@@ -446,8 +458,7 @@ public class UserPanel extends javax.swing.JFrame {
         System.out.println(selectedindex);
         if (selectedindex >= 0) {
             editedUser = list.get(selectedindex);
-            setObjectForm();
-            enableForm(true);
+            openUserDialog();
         }
     }//GEN-LAST:event_btnEidtActionPerformed
 

@@ -15,17 +15,19 @@ import javax.swing.JOptionPane;
  */
 public class UserDialog extends javax.swing.JDialog {
 
-    private final  UserService userService;
+    private final UserService userService;
     private User editedUser;
 
     /**
      * Creates new form UserDialog
      */
     public UserDialog(java.awt.Frame parent, User editedUser) {
-        super(parent,true);
-        this.editedUser   = editedUser;
+
+        super(parent, true);
         initComponents();
-        userService = new  UserService();
+        this.editedUser = editedUser;
+        setObjectForm();
+        userService = new UserService();
     }
 
     /**
@@ -358,7 +360,7 @@ public class UserDialog extends javax.swing.JDialog {
         });
 
         btnClear1.setBackground(new java.awt.Color(255, 153, 153));
-        btnClear1.setText("Clear");
+        btnClear1.setText("Cancel");
         btnClear1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnClear1ActionPerformed(evt);
@@ -480,7 +482,7 @@ public class UserDialog extends javax.swing.JDialog {
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         // TODO add your handling code here:
         clearForm();
-        
+
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
@@ -493,20 +495,21 @@ public class UserDialog extends javax.swing.JDialog {
         }
 
         clearForm();
-        
-        
+        this.dispose();
+
+
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         int selectedIndex = tableUser.getSelectedRow();
         if (selectedIndex >= 0) {
-           
+
             int input = JOptionPane.showConfirmDialog(this, "Do you want to delete?", "Select an Option...", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
             if (input == 0) {
                 userService.deleteUser(editedUser);
             }
         }
-        
+
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnAddNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddNewActionPerformed
@@ -518,7 +521,7 @@ public class UserDialog extends javax.swing.JDialog {
         int selectedindex = tableUser.getSelectedRow();
         System.out.println(selectedindex);
         if (selectedindex >= 0) {
-           
+
             setObjectForm();
         }
     }//GEN-LAST:event_btnEidtActionPerformed
@@ -541,8 +544,7 @@ public class UserDialog extends javax.swing.JDialog {
 
     private void btnClear1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClear1ActionPerformed
         // TODO add your handling code here:
-        clearForm();
-        
+        dispose();
     }//GEN-LAST:event_btnClear1ActionPerformed
 
     private void btnSave1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSave1ActionPerformed
@@ -555,11 +557,10 @@ public class UserDialog extends javax.swing.JDialog {
         }
 
         clearForm();
-        
-        
-    }//GEN-LAST:event_btnSave1ActionPerformed
+        dispose();
 
-   
+
+    }//GEN-LAST:event_btnSave1ActionPerformed
 
     private void setObjectForm() {
 //        editedUser = new User();
@@ -602,8 +603,6 @@ public class UserDialog extends javax.swing.JDialog {
         txtLogin1.requestFocus();
         labelId1.setText("-1");
     }
-
-    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
