@@ -13,14 +13,23 @@ import java.util.List;
  * @author werapan
  */
 public class UserService {
+    public static User currentUser;
     public User login(String login, String password) {
         UserDao userDao = new UserDao();
         User user = userDao.getByLogin(login);
         if(user != null && user.getPassword().equals(password)) {
+            currentUser = user;
             return user;
         }
         return null;
     }
+
+    public  User getCurrentUser() {
+        UserDao userDao = new UserDao();
+        User user = userDao.get(6);;
+        return user;
+    }
+    
     public int deleteUser(User editedUser) {
         UserDao userdao = new UserDao();
         return userdao.delete(editedUser);

@@ -12,16 +12,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
 
 /**
  *
  * @author werapan
  */
 public class RecieptDao implements Dao<Reciept> {
-
-
 
     @Override
     public Reciept get(int id) {
@@ -36,8 +37,7 @@ public class RecieptDao implements Dao<Reciept> {
             while (rs.next()) {
                 receipt = Reciept.fromRS(rs);
                 RecieptDetailDao rdd = new RecieptDetailDao();
-                ArrayList<RecieptDetail> recieptDetails = (ArrayList<RecieptDetail>)
-                rdd.getAll("recipt_id="+receipt.getId()," recipt_detail_id");
+                ArrayList<RecieptDetail> recieptDetails = (ArrayList<RecieptDetail>) rdd.getAll("recipt_id=" + receipt.getId(), " recipt_detail_id");
                 receipt.setRecieptDetails(recieptDetails);
             }
 
@@ -132,8 +132,13 @@ public class RecieptDao implements Dao<Reciept> {
                 + "VALUES( ?,?,?,?,?,?,?)";
         Connection conn = DatabaseHelper.getConnect();
         try {
+            Date date = new Date();
+            Timestamp timestamp = new Timestamp(date.getTime());
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String formattedDate = sdf.format(date);
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setTimestamp(1, obj.getCreatedDate());
+            stmt.setString(1, formattedDate);
             stmt.setFloat(2, obj.getTotalPrice());
             stmt.setFloat(3, obj.getCash());
             stmt.setInt(4, obj.getTotalQyt());
@@ -155,8 +160,8 @@ public class RecieptDao implements Dao<Reciept> {
     @Override
     public Reciept update(Reciept obj) {
         String sql = "UPDATE receipt "
-                 + "SET receipt_date = ?,total_price = ?,receipt_cash = ?,receipt_total_qyt = ?,receipt_change = ?,user_id = ?,customer_id = ?"+
-                " WHERE receipt_id = ?";
+                + "SET receipt_date = ?,total_price = ?,receipt_cash = ?,receipt_total_qyt = ?,receipt_change = ?,user_id = ?,customer_id = ?"
+                + " WHERE receipt_id = ?";
         Connection conn = DatabaseHelper.getConnect();
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -167,7 +172,7 @@ public class RecieptDao implements Dao<Reciept> {
             stmt.setInt(4, obj.getTotalQyt());
             stmt.setFloat(5, obj.getChange());
             stmt.setInt(6, obj.getUserId());
-       
+
             stmt.setInt(7, obj.getCustomerId());
 
             stmt.setInt(8, obj.getId());
