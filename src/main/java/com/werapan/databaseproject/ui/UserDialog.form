@@ -380,53 +380,61 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="labelId1" min="-2" pref="37" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jLabel13" min="-2" pref="52" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="comboRole1" max="32767" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jLabel10" min="-2" pref="52" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="txtLogin1" min="-2" pref="135" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                          <Component id="jLabel11" min="-2" pref="52" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
-                          <Component id="jLabel12" min="-2" pref="71" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txtPassword1" min="-2" pref="135" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="txtName1" alignment="0" min="-2" pref="135" max="-2" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="radioMale1" min="-2" pref="75" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="radioFemale1" min="-2" pref="75" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <EmptySpace pref="118" max="32767" attributes="0"/>
-              </Group>
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Component id="btnSave1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnClear1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="labelId1" min="-2" pref="37" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jLabel13" min="-2" pref="52" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="comboRole1" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jLabel10" min="-2" pref="52" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="txtLogin1" min="-2" pref="135" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                                  <Component id="jLabel11" min="-2" pref="52" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
+                                  <Component id="jLabel12" min="-2" pref="71" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="txtPassword1" min="-2" pref="135" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="txtName1" alignment="0" min="-2" pref="135" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="radioMale1" min="-2" pref="75" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="radioFemale1" min="-2" pref="75" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="245" max="-2" attributes="0"/>
+                          <Component id="txtPhoto" min="-2" pref="143" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace pref="118" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -454,7 +462,9 @@
                       <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="comboRole1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="145" max="32767" attributes="0"/>
+                  <EmptySpace pref="37" max="32767" attributes="0"/>
+                  <Component id="txtPhoto" min="-2" pref="134" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnSave1" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnClear1" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -566,6 +576,11 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSave1ActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="txtPhoto">
+          <Properties>
+            <Property name="opaque" type="boolean" value="true"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
