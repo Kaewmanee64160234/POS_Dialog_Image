@@ -7,8 +7,14 @@ package com.werapan.databaseproject.ui;
 import com.werapan.databaseproject.model.User;
 import com.werapan.databaseproject.service.UserService;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -21,6 +27,7 @@ public class UserDialog extends javax.swing.JDialog {
 
     private final UserService userService;
     private User editedUser;
+    private String path;
 
     /**
      * Creates new form UserDialog
@@ -569,18 +576,23 @@ public class UserDialog extends javax.swing.JDialog {
 
     private void btnSave1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSave1ActionPerformed
         setFormToObject();
+        User user;
         if (editedUser.getId() < 0) {
-            userService.addNew(editedUser);
+            user = userService.addNew(editedUser);
 
         } else {
-            userService.updateUser(editedUser);
+            user = userService.updateUser(editedUser);
         }
 
         clearForm();
-        dispose();
+        saveImage(user);
+       
+dispose();
 
 
     }//GEN-LAST:event_btnSave1ActionPerformed
+
+    
 
     private void txtPhotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPhotoMouseClicked
         // TODO add your handling code here:
@@ -658,9 +670,19 @@ public class UserDialog extends javax.swing.JDialog {
         JFileChooser chooser = new JFileChooser();
         chooser.showOpenDialog(this);
         File f = chooser.getSelectedFile();
-        String path = f.getAbsolutePath();
-        ImageIcon icon = new ImageIcon(path);
-        loadImage(path);
+        String pathFile = f.getAbsolutePath();
+        ImageIcon icon = new ImageIcon(pathFile);
+        loadImage(pathFile);
+        path = pathFile;
+    }
+    private void saveImage(User user) {
+        BufferedImage image;
+        try {
+            image = ImageIO.read(new File(path));
+            ImageIO.write(image, "png", new File("./user_" + user.getId() + ".png"));
+        } catch (IOException ex) {
+            Logger.getLogger(UserDialog.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 
