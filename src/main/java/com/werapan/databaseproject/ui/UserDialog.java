@@ -15,17 +15,17 @@ import javax.swing.JOptionPane;
  */
 public class UserDialog extends javax.swing.JDialog {
 
-    private UserService userService;
-    private List<User> list;
+    private final  UserService userService;
     private User editedUser;
-    private static user;
 
     /**
      * Creates new form UserDialog
      */
-    public UserDialog(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public UserDialog(java.awt.Frame parent, User editedUser) {
+        super(parent,true);
+        this.editedUser   = editedUser;
         initComponents();
+        userService = new  UserService();
     }
 
     /**
@@ -480,7 +480,7 @@ public class UserDialog extends javax.swing.JDialog {
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         // TODO add your handling code here:
         clearForm();
-        enableForm(false);
+        
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
@@ -493,35 +493,33 @@ public class UserDialog extends javax.swing.JDialog {
         }
 
         clearForm();
-        enableForm(false);
-        refreshTable();
+        
+        
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         int selectedIndex = tableUser.getSelectedRow();
         if (selectedIndex >= 0) {
-            editedUser = list.get(selectedIndex);
+           
             int input = JOptionPane.showConfirmDialog(this, "Do you want to delete?", "Select an Option...", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
             if (input == 0) {
                 userService.deleteUser(editedUser);
             }
         }
-        refreshTable();
+        
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnAddNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddNewActionPerformed
         editedUser = new User();
         setObjectForm();
-        enableForm(true);
     }//GEN-LAST:event_btnAddNewActionPerformed
 
     private void btnEidtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEidtActionPerformed
         int selectedindex = tableUser.getSelectedRow();
         System.out.println(selectedindex);
         if (selectedindex >= 0) {
-            editedUser = list.get(selectedindex);
+           
             setObjectForm();
-            enableForm(true);
         }
     }//GEN-LAST:event_btnEidtActionPerformed
 
@@ -544,7 +542,7 @@ public class UserDialog extends javax.swing.JDialog {
     private void btnClear1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClear1ActionPerformed
         // TODO add your handling code here:
         clearForm();
-        enableForm(false);
+        
     }//GEN-LAST:event_btnClear1ActionPerformed
 
     private void btnSave1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSave1ActionPerformed
@@ -557,51 +555,11 @@ public class UserDialog extends javax.swing.JDialog {
         }
 
         clearForm();
-        enableForm(false);
-        refreshTable();
+        
+        
     }//GEN-LAST:event_btnSave1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UserDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UserDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UserDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UserDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                UserDialog dialog = new UserDialog(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
+   
 
     private void setObjectForm() {
 //        editedUser = new User();
@@ -645,25 +603,8 @@ public class UserDialog extends javax.swing.JDialog {
         labelId.setText("-1");
     }
 
-    private void enableForm(boolean isEnable) {
-        txtLogin.setEnabled(isEnable);
-        txtName.setEnabled(isEnable);
-        txtPassword.setEnabled(isEnable);
-        comboRole.setEnabled(isEnable);
-        radioMale.setEnabled(isEnable);
-        radioFemale.setEnabled(isEnable);
+    
 
-        btnClear.setEnabled(isEnable);
-        btnSave.setEnabled(isEnable);
-        txtLogin.requestFocus();
-    }
-
-    private void refreshTable() {
-        list = userService.getuser();
-        tableUser.revalidate();
-        tableUser.repaint();
-//    }
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddNew;

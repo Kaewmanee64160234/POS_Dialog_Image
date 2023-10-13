@@ -6,8 +6,11 @@ package com.werapan.databaseproject.ui;
 
 import com.werapan.databaseproject.model.User;
 import com.werapan.databaseproject.service.UserService;
+import java.awt.Frame;
 import java.util.List;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -417,8 +420,9 @@ public class UserPanel extends javax.swing.JFrame {
 
     private void btnAddNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddNewActionPerformed
         editedUser = new User();
-        setObjectForm();
-        enableForm(true);
+        JFrame frame = (JFrame) SwingUtilities.getRoot(this);
+        UserDialog userDialog = new UserDialog(frame, editedUser);
+        userDialog.setVisible(true);
 
     }//GEN-LAST:event_btnAddNewActionPerformed
 
