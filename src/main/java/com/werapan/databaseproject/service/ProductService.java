@@ -20,6 +20,11 @@ public class ProductService {
         ProductDao productDao = new ProductDao();
         return productDao.getAll(" product_id asc");
     }
+    public List<Product> getproductsOrderByName(){
+        ProductDao productDao = new ProductDao();
+        return productDao.getAll(" product_name asc");
+        
+    }
    
 
     public Product addNew(Product editedProduct) {
