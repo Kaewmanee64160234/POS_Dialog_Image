@@ -18,6 +18,7 @@ public class UserDialog extends javax.swing.JDialog {
     private UserService userService;
     private List<User> list;
     private User editedUser;
+    private static user;
 
     /**
      * Creates new form UserDialog
