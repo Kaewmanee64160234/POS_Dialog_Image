@@ -295,7 +295,13 @@ public class POSPanel extends javax.swing.JDialog {
         // TODO add your handling code here:
         System.out.println(reciept.toString());
         recieptService.addNew(reciept);
+        clearRecipt();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void clearRecipt() {
+        reciept = new Reciept();
+        reciept.setUser(userService.getCurrentUser());
+    }
 
     /**
      * @param args the command line arguments
