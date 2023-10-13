@@ -16,7 +16,7 @@ public class ProductListPannel extends javax.swing.JPanel {
     /** Creates new form ProductListPannel */
     public ProductListPannel() {
         initComponents();
-        int productSize = 20;
+        int productSize = 5;
         for (int i = 0; i < productSize; i++) {
             pnlProductList.add(new ProductItemPanel());
             
