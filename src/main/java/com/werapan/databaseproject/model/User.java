@@ -38,16 +38,6 @@ public class User {
         this.role = role;
         this.gender = gender;
     }
-    
-
-    public User(){
-        this.id=-1;
-        this.gender = "M";
-        this.role = 0;
-        this.name = "";
-        this.password="";
-        this.login="";
-    }
 
     public String getLogin() {
         return login;
@@ -57,7 +47,14 @@ public class User {
         this.login = login;
     }
 
- 
+    public User() {
+        this.id = -1;
+        this.gender = "M";
+        this.role = 0;
+        this.name = "";
+        this.login = "";
+        this.password = "";
+    }
 
     public int getId() {
         return id;

@@ -5,7 +5,8 @@
 package com.werapan.databaseproject.dao;
 
 import com.werapan.databaseproject.helper.DatabaseHelper;
-import com.werapan.databaseproject.model.User;
+import com.werapan.databaseproject.model.Reciept;
+import com.werapan.databaseproject.model.RecieptDetail;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,12 +19,12 @@ import java.util.List;
  *
  * @author werapan
  */
-public class UserDao implements Dao<User> {
+public class RecieptDetailDao implements Dao<RecieptDetail> {
 
     @Override
-    public User get(int id) {
-        User user = null;
-        String sql = "SELECT * FROM user WHERE user_id=?";
+    public RecieptDetail get(int id) {
+        RecieptDetail receipt = null;
+        String sql = "SELECT * FROM  recipt_detail  WHERE recipt_detail_id=?";
         Connection conn = DatabaseHelper.getConnect();
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -31,87 +32,27 @@ public class UserDao implements Dao<User> {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                user = User.fromRS(rs);
+                receipt = RecieptDetail.fromRS(rs);
             }
 
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-        return user;
+        return receipt;
     }
 
-    public User getByLogin(String name) {
-        User user = null;
-        String sql = "SELECT * FROM user WHERE user_login=?";
-        Connection conn = DatabaseHelper.getConnect();
-        try {
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, name);
-            ResultSet rs = stmt.executeQuery();
-
-            while (rs.next()) {
-                user = User.fromRS(rs);
-            }
-
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-        return user;
-    }
-
-    public List<User> getAll() {
-        ArrayList<User> list = new ArrayList();
-        String sql = "SELECT * FROM user";
-        Connection conn = DatabaseHelper.getConnect();
-        try {
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
-
-            while (rs.next()) {
-                User user = User.fromRS(rs);
-                list.add(user);
-
-            }
-
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-        return list;
-    }
-    
     @Override
-    public List<User> getAll(String where, String order) {
-        ArrayList<User> list = new ArrayList();
-        String sql = "SELECT * FROM user where " + where + " ORDER BY" + order;
+    public List<RecieptDetail> getAll() {
+        ArrayList<RecieptDetail> list = new ArrayList();
+        String sql = "SELECT * FROM recipt_detail";
         Connection conn = DatabaseHelper.getConnect();
         try {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
-                User user = User.fromRS(rs);
-                list.add(user);
-
-            }
-
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-        return list;
-    }
-    
-
-    public List<User> getAll(String order) {
-        ArrayList<User> list = new ArrayList();
-        String sql = "SELECT * FROM user  ORDER BY" + order;
-        Connection conn = DatabaseHelper.getConnect();
-        try {
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
-
-            while (rs.next()) {
-                User user = User.fromRS(rs);
-                list.add(user);
+                RecieptDetail receipt = RecieptDetail.fromRS(rs);
+                list.add(receipt);
 
             }
 
@@ -122,19 +63,63 @@ public class UserDao implements Dao<User> {
     }
 
     @Override
-    public User save(User obj) {
+    public List<RecieptDetail> getAll(String where, String order) {
+        ArrayList<RecieptDetail> list = new ArrayList();
+        String sql = "SELECT * FROM recipt_detail where " + where + " ORDER BY" + order;
+        Connection conn = DatabaseHelper.getConnect();
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
 
-        String sql = "INSERT INTO user (user_login, user_name, user_gender, user_password, user_role)"
-                + "VALUES(?, ?, ?, ?, ?)";
+            while (rs.next()) {
+                RecieptDetail receipt = RecieptDetail.fromRS(rs);
+                list.add(receipt);
+
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return list;
+    }
+
+    public List<RecieptDetail> getAll(String order) {
+        ArrayList<RecieptDetail> list = new ArrayList();
+        String sql = "SELECT * FROM recipt_detail  ORDER BY" + order;
+        Connection conn = DatabaseHelper.getConnect();
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                RecieptDetail receipt = RecieptDetail.fromRS(rs);
+                list.add(receipt);
+
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return list;
+    }
+
+    @Override
+    public RecieptDetail save(RecieptDetail obj) {
+
+        String sql = "INSERT INTO recipt_detail ("
+                + "product_id,product_name,product_price,qty,total_price,recipt_id)"
+                + "VALUES( ?,?,?,?,?,?)";
         Connection conn = DatabaseHelper.getConnect();
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, obj.getLogin());
-            stmt.setString(2, obj.getName());
-            stmt.setString(3, obj.getGender());
-            stmt.setString(4, obj.getPassword());
-            stmt.setInt(5, obj.getRole());
-//            System.out.println(stmt);
+            stmt.setInt(1, obj.getProduct_id());
+            stmt.setString(2, obj.getProduct_name());
+            stmt.setFloat(3, obj.getProduct_price());
+            stmt.setInt(4, obj.getQty());
+            stmt.setFloat(5, obj.getTotal_price());
+            stmt.setInt(6, obj.getRecipt_id());
+
+            // System.out.println(stmt);
             stmt.executeUpdate();
             int id = DatabaseHelper.getInsertedId(stmt);
             obj.setId(id);
@@ -146,20 +131,28 @@ public class UserDao implements Dao<User> {
     }
 
     @Override
-    public User update(User obj) {
-        String sql = "UPDATE user"
-                + " SET user_login = ?, user_name = ?, user_gender = ?, user_password = ?, user_role = ?"
-                + " WHERE user_id = ?";
+    public RecieptDetail update(RecieptDetail obj) {
+        String sql = "UPDATE recipt_detail SET "+
+            "product_id = ?, "+
+            "product_name = ?,"+
+            "product_price = ?,"+
+           " qty = ?,"+
+            "total_price = ?,"+
+           " recipt_id = ?"+
+     " WHERE recipt_detail_id = ?"
+      ;     
         Connection conn = DatabaseHelper.getConnect();
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, obj.getLogin());
-            stmt.setString(2, obj.getName());
-            stmt.setString(3, obj.getGender());
-            stmt.setString(4, obj.getPassword());
-            stmt.setInt(5, obj.getRole());
-            stmt.setInt(6, obj.getId());
-//            System.out.println(stmt);
+            stmt.setInt(1, obj.getProduct_id());
+            stmt.setString(2, obj.getProduct_name());
+            stmt.setFloat(3, obj.getProduct_price());
+            stmt.setInt(4, obj.getQty());
+            stmt.setFloat(5, obj.getTotal_price());
+            stmt.setInt(6, obj.getRecipt_id());
+            stmt.setInt(7, obj.getId());
+
+            // System.out.println(stmt);
             int ret = stmt.executeUpdate();
             System.out.println(ret);
             return obj;
@@ -170,8 +163,8 @@ public class UserDao implements Dao<User> {
     }
 
     @Override
-    public int delete(User obj) {
-        String sql = "DELETE FROM user WHERE user_id=?";
+    public int delete(RecieptDetail obj) {
+        String sql = "DELETE FROM recipt_detail WHERE receipt_detail_id=?";
         Connection conn = DatabaseHelper.getConnect();
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -181,7 +174,7 @@ public class UserDao implements Dao<User> {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-        return -1;        
+        return -1;
     }
 
 }

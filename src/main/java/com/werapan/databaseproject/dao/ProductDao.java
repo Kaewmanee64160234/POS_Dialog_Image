@@ -5,7 +5,7 @@
 package com.werapan.databaseproject.dao;
 
 import com.werapan.databaseproject.helper.DatabaseHelper;
-import com.werapan.databaseproject.model.User;
+import com.werapan.databaseproject.model.Product;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,12 +18,12 @@ import java.util.List;
  *
  * @author werapan
  */
-public class UserDao implements Dao<User> {
+public class ProductDao implements Dao<Product> {
 
     @Override
-    public User get(int id) {
-        User user = null;
-        String sql = "SELECT * FROM user WHERE user_id=?";
+    public Product get(int id) {
+        Product product = null;
+        String sql = "SELECT * FROM  product  WHERE product_id=?";
         Connection conn = DatabaseHelper.getConnect();
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -31,45 +31,28 @@ public class UserDao implements Dao<User> {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                user = User.fromRS(rs);
+                product = Product.fromRS(rs);
             }
 
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-        return user;
+        return product;
     }
 
-    public User getByLogin(String name) {
-        User user = null;
-        String sql = "SELECT * FROM user WHERE user_login=?";
-        Connection conn = DatabaseHelper.getConnect();
-        try {
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, name);
-            ResultSet rs = stmt.executeQuery();
 
-            while (rs.next()) {
-                user = User.fromRS(rs);
-            }
-
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-        return user;
-    }
-
-    public List<User> getAll() {
-        ArrayList<User> list = new ArrayList();
-        String sql = "SELECT * FROM user";
+    @Override
+    public List<Product> getAll() {
+        ArrayList<Product> list = new ArrayList();
+        String sql = "SELECT * FROM product";
         Connection conn = DatabaseHelper.getConnect();
         try {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
-                User user = User.fromRS(rs);
-                list.add(user);
+                Product product = Product.fromRS(rs);
+                list.add(product);
 
             }
 
@@ -80,17 +63,17 @@ public class UserDao implements Dao<User> {
     }
     
     @Override
-    public List<User> getAll(String where, String order) {
-        ArrayList<User> list = new ArrayList();
-        String sql = "SELECT * FROM user where " + where + " ORDER BY" + order;
+    public List<Product> getAll(String where, String order) {
+        ArrayList<Product> list = new ArrayList();
+        String sql = "SELECT * FROM product where " + where + " ORDER BY" + order;
         Connection conn = DatabaseHelper.getConnect();
         try {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
-                User user = User.fromRS(rs);
-                list.add(user);
+                Product product = Product.fromRS(rs);
+                list.add(product);
 
             }
 
@@ -101,17 +84,17 @@ public class UserDao implements Dao<User> {
     }
     
 
-    public List<User> getAll(String order) {
-        ArrayList<User> list = new ArrayList();
-        String sql = "SELECT * FROM user  ORDER BY" + order;
+    public List<Product> getAll(String order) {
+        ArrayList<Product> list = new ArrayList();
+        String sql = "SELECT * FROM product  ORDER BY" + order;
         Connection conn = DatabaseHelper.getConnect();
         try {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
-                User user = User.fromRS(rs);
-                list.add(user);
+                Product product = Product.fromRS(rs);
+                list.add(product);
 
             }
 
@@ -122,18 +105,26 @@ public class UserDao implements Dao<User> {
     }
 
     @Override
-    public User save(User obj) {
+    public Product save(Product obj) {
 
-        String sql = "INSERT INTO user (user_login, user_name, user_gender, user_password, user_role)"
-                + "VALUES(?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO product (" +
+                        "product_name,"+
+                       " product_price,"+
+                       " product_size,"+
+                       " product_sweet_level,"+
+                        "product_type,"+
+                       " category_id"+
+                   ")"+"VALUES (?,?,?,?,?,?)";
         Connection conn = DatabaseHelper.getConnect();
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, obj.getLogin());
-            stmt.setString(2, obj.getName());
-            stmt.setString(3, obj.getGender());
-            stmt.setString(4, obj.getPassword());
-            stmt.setInt(5, obj.getRole());
+          stmt.setString(1, obj.getName());
+            stmt.setFloat(2, obj.getPrice());
+            stmt.setString(3, obj.getSize());
+            stmt.setString(4, obj.getSweet_level());
+            stmt.setString(5, obj.getType());
+            stmt.setInt(6, obj.getCategory_id());
+           
 //            System.out.println(stmt);
             stmt.executeUpdate();
             int id = DatabaseHelper.getInsertedId(stmt);
@@ -146,19 +137,26 @@ public class UserDao implements Dao<User> {
     }
 
     @Override
-    public User update(User obj) {
-        String sql = "UPDATE user"
-                + " SET user_login = ?, user_name = ?, user_gender = ?, user_password = ?, user_role = ?"
-                + " WHERE user_id = ?";
+    public Product update(Product obj) {
+        String sql = "UPDATE product SET "
+                + "product_name=?,"
+                + "product_price=?,"
+                + "product_size=?,"
+                + "product_sweet_level=?,"
+                + "product_type=?,"
+                + "category_id=?"
+                + "WHERE product_id=?";
         Connection conn = DatabaseHelper.getConnect();
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, obj.getLogin());
-            stmt.setString(2, obj.getName());
-            stmt.setString(3, obj.getGender());
-            stmt.setString(4, obj.getPassword());
-            stmt.setInt(5, obj.getRole());
-            stmt.setInt(6, obj.getId());
+            stmt.setString(1, obj.getName());
+            stmt.setFloat(2, obj.getPrice());
+            stmt.setString(3, obj.getSize());
+            stmt.setString(4, obj.getSweet_level());
+            stmt.setString(5, obj.getType());
+            stmt.setInt(6, obj.getCategory_id());
+            stmt.setInt(7, obj.getId());
+            
 //            System.out.println(stmt);
             int ret = stmt.executeUpdate();
             System.out.println(ret);
@@ -170,8 +168,8 @@ public class UserDao implements Dao<User> {
     }
 
     @Override
-    public int delete(User obj) {
-        String sql = "DELETE FROM user WHERE user_id=?";
+    public int delete(Product obj) {
+        String sql = "DELETE FROM product WHERE product_id=?";
         Connection conn = DatabaseHelper.getConnect();
         try {
             PreparedStatement stmt = conn.prepareStatement(sql);
