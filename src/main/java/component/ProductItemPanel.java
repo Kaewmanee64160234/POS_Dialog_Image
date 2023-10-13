@@ -4,17 +4,32 @@
  */
 package component;
 
+import com.werapan.databaseproject.model.Product;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author USER
  */
 public class ProductItemPanel extends javax.swing.JPanel {
 
+    private final Product product;
+
     /**
      * Creates new form ProductItemPanel
      */
-    public ProductItemPanel() {
+    public ProductItemPanel(Product p) {
         initComponents();
+        product = p;
+        lblNameProduct.setText(p.getName());
+        ImageIcon icon = new ImageIcon("./product_" + product.getId() + ".png");
+        Image image = icon.getImage();
+        int width = image.getWidth(null);
+        int height = image.getHeight(null);
+        Image newImage = image.getScaledInstance((int) ((209.0 * width) / height), 209, Image.SCALE_SMOOTH);
+        icon.setImage(newImage);
+        lblImage.setIcon(icon);
     }
 
     /**
@@ -28,7 +43,7 @@ public class ProductItemPanel extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         lblImage = new javax.swing.JLabel();
-        lalNameProduct = new javax.swing.JLabel();
+        lblNameProduct = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         btnDelete = new javax.swing.JButton();
         btnAdd = new javax.swing.JButton();
@@ -37,9 +52,9 @@ public class ProductItemPanel extends javax.swing.JPanel {
         lblImage.setBackground(new java.awt.Color(204, 255, 204));
         lblImage.setOpaque(true);
 
-        lalNameProduct.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lalNameProduct.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lalNameProduct.setText("Product Name");
+        lblNameProduct.setFont(new java.awt.Font("TH SarabunPSK", 0, 24)); // NOI18N
+        lblNameProduct.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNameProduct.setText("Product Name");
 
         btnDelete.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         btnDelete.setText("-");
@@ -85,30 +100,25 @@ public class ProductItemPanel extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lalNameProduct, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 15, Short.MAX_VALUE)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(20, Short.MAX_VALUE))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblImage, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblImage, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNameProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblImage, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(lalNameProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(12, 12, 12)
+                .addComponent(lblNameProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(18, 18, 18))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -117,8 +127,7 @@ public class ProductItemPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,8 +148,8 @@ public class ProductItemPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnDelete;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JLabel lalNameProduct;
     private javax.swing.JLabel lblImage;
+    private javax.swing.JLabel lblNameProduct;
     private javax.swing.JTextField txtNumOfProduct;
     // End of variables declaration//GEN-END:variables
 }
