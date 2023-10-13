@@ -163,8 +163,10 @@ public class Reciept {
         this.recieptDetails = recieptDetails;
     }
 
-    public void addReceiptDetail(RecieptDetail receiptDateil) {
-        recieptDetails.add(receiptDateil);
+    public void addReceiptDetail(Product product,int qty) {
+         RecieptDetail rd = new RecieptDetail(product.getId(), product.getName(), product.getPrice(), 1,
+                        product.getPrice() * 1, -1);
+        recieptDetails.add(rd);
         calculateTotal();
     }
 
