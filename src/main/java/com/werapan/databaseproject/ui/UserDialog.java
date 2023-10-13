@@ -7,8 +7,10 @@ package com.werapan.databaseproject.ui;
 import com.werapan.databaseproject.model.User;
 import com.werapan.databaseproject.service.UserService;
 import java.awt.Image;
+import java.io.File;
 import java.util.List;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /**
@@ -31,18 +33,6 @@ public class UserDialog extends javax.swing.JDialog {
         setObjectForm();
         userService = new UserService();
         loadImage();
-    }
-
-    private void loadImage() {
-        if(editedUser.getId()>0){
-              ImageIcon icon = new ImageIcon("./user_"+editedUser.getId()+".png") ;
-        Image image = icon.getImage();
-        Image newImage = image.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
-        icon.setImage(newImage);
-        txtPhoto.setIcon(icon);
-            
-        }
-      
     }
 
     /**
@@ -392,6 +382,11 @@ public class UserDialog extends javax.swing.JDialog {
         });
 
         txtPhoto.setOpaque(true);
+        txtPhoto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtPhotoMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -587,12 +582,17 @@ public class UserDialog extends javax.swing.JDialog {
 
     }//GEN-LAST:event_btnSave1ActionPerformed
 
+    private void txtPhotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPhotoMouseClicked
+        // TODO add your handling code here:
+        choosePhoto();
+    }//GEN-LAST:event_txtPhotoMouseClicked
+
     private void setObjectForm() {
 //        editedUser = new User();
         txtLogin1.setText(editedUser.getLogin());
         txtName1.setText(editedUser.getName());
         txtPassword1.setText(editedUser.getPassword());
-        labelId1.setText(editedUser.getId()+"");
+        labelId1.setText(editedUser.getId() + "");
         if (editedUser.getGender().equals("M")) {
             radioMale1.setSelected(true);
         } else {
@@ -628,6 +628,39 @@ public class UserDialog extends javax.swing.JDialog {
         radioMale1.setSelected(true);
         txtLogin1.requestFocus();
         labelId1.setText("-1");
+    }
+
+    private void loadImage() {
+        if (editedUser.getId() > 0) {
+            ImageIcon icon = new ImageIcon("./user_" + editedUser.getId() + ".png");
+            Image image = icon.getImage();
+            Image newImage = image.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+            icon.setImage(newImage);
+            txtPhoto.setIcon(icon);
+            
+        }
+
+    }
+
+    private void loadImage(String path) {
+        if (editedUser.getId() > 0) {
+            ImageIcon icon = new ImageIcon(path);
+            Image image = icon.getImage();
+            Image newImage = image.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+            icon.setImage(newImage);
+            txtPhoto.setIcon(icon);
+
+        }
+
+    }
+
+    private void choosePhoto() {
+        JFileChooser chooser = new JFileChooser();
+        chooser.showOpenDialog(this);
+        File f = chooser.getSelectedFile();
+        String path = f.getAbsolutePath();
+        ImageIcon icon = new ImageIcon(path);
+        loadImage(path);
     }
 
 
