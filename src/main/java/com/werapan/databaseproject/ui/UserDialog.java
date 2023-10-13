@@ -676,6 +676,7 @@ dispose();
         path = pathFile;
     }
     private void saveImage(User user) {
+        if(path == null || path.isEmpty() ) return;
         BufferedImage image;
         try {
             image = ImageIO.read(new File(path));
