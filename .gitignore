@@ -200,3 +200,5 @@ README.html
 .idea
 .exercism
 *.db
+*.jpg
+*.png

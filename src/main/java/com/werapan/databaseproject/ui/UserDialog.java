@@ -14,9 +14,10 @@ import javax.swing.JOptionPane;
  * @author USER
  */
 public class UserDialog extends javax.swing.JDialog {
- private UserService userService;
+
+    private UserService userService;
     private List<User> list;
-    private User editedUser;    
+    private User editedUser;
 
     /**
      * Creates new form UserDialog
@@ -600,7 +601,8 @@ public class UserDialog extends javax.swing.JDialog {
             }
         });
     }
-     private void setObjectForm() {
+
+    private void setObjectForm() {
 //        editedUser = new User();
         txtLogin.setText(editedUser.getLogin());
         txtName.setText(editedUser.getName());
@@ -613,7 +615,8 @@ public class UserDialog extends javax.swing.JDialog {
         }
         comboRole.setSelectedIndex(editedUser.getRole());
     }
-       private void setFormToObject() {
+
+    private void setFormToObject() {
         // private void FormToObject() {
 
         String login = txtLogin.getText();
@@ -630,7 +633,8 @@ public class UserDialog extends javax.swing.JDialog {
         editedUser.setGender(gander);
         editedUser.setRole(role);
     }
- private void clearForm() {
+
+    private void clearForm() {
         txtLogin.setText("");
         txtName.setText("");
         txtPassword.setText("");
@@ -652,7 +656,8 @@ public class UserDialog extends javax.swing.JDialog {
         btnSave.setEnabled(isEnable);
         txtLogin.requestFocus();
     }
-     private void refreshTable() {
+
+    private void refreshTable() {
         list = userService.getuser();
         tableUser.revalidate();
         tableUser.repaint();
