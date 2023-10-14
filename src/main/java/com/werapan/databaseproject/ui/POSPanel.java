@@ -46,6 +46,7 @@ public class POSPanel extends javax.swing.JDialog implements BuyProductAble {
 
         initComponents();
         initProductsTable();
+        jLabel1.setText("User :"+userService.getCurrentUser().getName()+" "+userService.getCurrentUser().getLogin());
         reciept = new Reciept();
         reciept.setUserId(userService.getCurrentUser().getId());
         reciept.setUser(userService.getCurrentUser());
@@ -364,12 +365,14 @@ public class POSPanel extends javax.swing.JDialog implements BuyProductAble {
         // TODO add your handling code here:
         System.out.println(reciept.toString());
         recieptService.addNew(reciept);
+        lblTotal.setText("Total : 0");
         clearRecipt();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void clearRecipt() {
         reciept = new Reciept();
         reciept.setUser(userService.getCurrentUser());
+        refreshTableRecieptDetail();
     }
 
     /**

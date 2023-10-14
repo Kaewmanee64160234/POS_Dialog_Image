@@ -77,9 +77,19 @@ public class ProductItemPanel extends javax.swing.JPanel {
 
         btnDelete.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         btnDelete.setText("-");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         btnAdd.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         btnAdd.setText("+");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
         txtNumOfProduct.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtNumOfProduct.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -160,6 +170,17 @@ public class ProductItemPanel extends javax.swing.JPanel {
     private void txtNumOfProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumOfProductActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNumOfProductActionPerformed
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        // TODO add your handling code here:
+       txtNumOfProduct.setText((Integer.parseInt(txtNumOfProduct.getText())+1)+""); 
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        if(Integer.parseInt(txtNumOfProduct.getText())<1)return;
+         txtNumOfProduct.setText((Integer.parseInt(txtNumOfProduct.getText())-1)+""); 
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
