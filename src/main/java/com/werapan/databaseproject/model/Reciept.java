@@ -164,8 +164,8 @@ public class Reciept {
     }
 
     public void addReceiptDetail(Product product,int qty) {
-         RecieptDetail rd = new RecieptDetail(product.getId(), product.getName(), product.getPrice(), 1,
-                        product.getPrice() * 1, -1);
+         RecieptDetail rd = new RecieptDetail(product.getId(), product.getName(), product.getPrice(), qty,
+                        product.getPrice() * qty, -1);
         recieptDetails.add(rd);
         calculateTotal();
     }

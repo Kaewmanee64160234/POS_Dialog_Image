@@ -14,9 +14,10 @@ import java.util.ArrayList;
  *
  * @author USER
  */
-public class ProductListPannel extends javax.swing.JPanel {
+public class ProductListPannel extends javax.swing.JPanel implements BuyProductAble {
 private final  ProductService productService ;
 private final ArrayList<Product> products;
+    private ArrayList<BuyProductAble> subscribers = new ArrayList<>();
     /** Creates new form ProductListPannel */
     public ProductListPannel() {
         initComponents();
@@ -24,7 +25,9 @@ private final ArrayList<Product> products;
          products = (ArrayList<Product>) productService.getproductsOrderByName();
         int productSize = products.size();
         for (Product p :products) {
-            pnlProductList.add(new ProductItemPanel(p));
+            ProductItemPanel pnnlProductList = new ProductItemPanel(p);
+            pnnlProductList.addOnBuyProduct(this);
+            pnlProductList.add(pnnlProductList);
             
         }
         pnlProductList.setLayout(new GridLayout((productSize/3)+((productSize%3 !=0)?1:0),3,0,0));
@@ -74,5 +77,17 @@ private final ArrayList<Product> products;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel pnlProductList;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void buy(Product product, int qty) {
+        System.out.println(product.getName()+" "+qty);
+        for (BuyProductAble subscriber : subscribers) {
+                    subscriber.buy(product, qty);
+                    
+                }
+    }
+    public void addOnBuyProduct(BuyProductAble subscriber){
+        subscribers.add(subscriber);
+    }
 
 }

@@ -11,6 +11,7 @@ import com.werapan.databaseproject.model.RecieptDetail;
 import com.werapan.databaseproject.service.ProductService;
 import com.werapan.databaseproject.service.RecieptService;
 import com.werapan.databaseproject.service.UserService;
+import component.BuyProductAble;
 import component.ProductListPannel;
 import java.awt.Font;
 import java.awt.Image;
@@ -25,7 +26,7 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author USER
  */
-public class POSPanel extends javax.swing.JDialog {
+public class POSPanel extends javax.swing.JDialog implements BuyProductAble {
 
     ArrayList<Product> productList;
     ProductDao productDao;
@@ -48,7 +49,11 @@ public class POSPanel extends javax.swing.JDialog {
         reciept = new Reciept();
         reciept.setUserId(userService.getCurrentUser().getId());
         reciept.setUser(userService.getCurrentUser());
+        productListPanel = new ProductListPannel();
+        scrProductList.setViewportView(productListPanel);
+        productListPanel.addOnBuyProduct(this);
         tableOrder.setModel(new AbstractTableModel() {
+
             String[] columnNames = {"Name", "Price", "Qty", "Total"};
 
             @Override
@@ -88,8 +93,7 @@ public class POSPanel extends javax.swing.JDialog {
             }
 
         });
-        productListPanel = new ProductListPannel();
-        scrProductList.setViewportView(productListPanel);
+
     }
 
     private void initProductsTable() {
@@ -154,11 +158,7 @@ public class POSPanel extends javax.swing.JDialog {
         tableMenu.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                int row = tableMenu.rowAtPoint(e.getPoint());
-                int col = tableMenu.columnAtPoint(e.getPoint());
-                Product product = productList.get(row);
-                reciept.addReceiptDetail(product, col);
-                refreshTableRecieptDetail();
+
             }
 
         });
@@ -248,13 +248,11 @@ public class POSPanel extends javax.swing.JDialog {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 326, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel3Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addGap(0, 15, Short.MAX_VALUE)
-                            .addComponent(scrProductList, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                    .addContainerGap(21, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
+                        .addComponent(scrProductList, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE))
                     .addContainerGap()))
         );
 
@@ -434,4 +432,10 @@ public class POSPanel extends javax.swing.JDialog {
     private javax.swing.JTable tableMenu;
     private javax.swing.JTable tableOrder;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void buy(Product product, int qty) {
+        reciept.addReceiptDetail(product, qty);
+        refreshTableRecieptDetail();
+    }
 }

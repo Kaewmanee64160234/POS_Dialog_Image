@@ -6,6 +6,9 @@ package component;
 
 import com.werapan.databaseproject.model.Product;
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
 /**
@@ -15,6 +18,7 @@ import javax.swing.ImageIcon;
 public class ProductItemPanel extends javax.swing.JPanel {
 
     private final Product product;
+    private ArrayList<BuyProductAble> subscribers = new ArrayList<>();
 
     /**
      * Creates new form ProductItemPanel
@@ -30,6 +34,21 @@ public class ProductItemPanel extends javax.swing.JPanel {
         Image newImage = image.getScaledInstance((int) ((209.0 * width) / height), 209, Image.SCALE_SMOOTH);
         icon.setImage(newImage);
         lblImage.setIcon(icon);
+        lblImage.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.out.println(".mouseClicked()");
+                for (BuyProductAble subscriber : subscribers) {
+                    subscriber.buy(product, Integer.parseInt(txtNumOfProduct.getText()));
+                    
+                }
+                txtNumOfProduct.setText("1");
+            }
+            
+        });
+    }
+    public void addOnBuyProduct(BuyProductAble subscriber){
+        subscribers.add(subscriber);
     }
 
     /**
@@ -152,4 +171,6 @@ public class ProductItemPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblNameProduct;
     private javax.swing.JTextField txtNumOfProduct;
     // End of variables declaration//GEN-END:variables
+
+   
 }
