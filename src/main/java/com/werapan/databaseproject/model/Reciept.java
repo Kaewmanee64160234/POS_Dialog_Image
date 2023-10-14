@@ -175,7 +175,7 @@ public class Reciept {
         calculateTotal();
     }
 
-    private void calculateTotal() {
+    public void calculateTotal() {
         int total_qty = 0;
         float total = 0.0f;
         for (RecieptDetail rd : recieptDetails) {

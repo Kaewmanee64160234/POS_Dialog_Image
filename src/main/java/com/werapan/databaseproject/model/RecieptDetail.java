@@ -90,11 +90,14 @@ public class RecieptDetail {
     }
 
     public int getQty() {
+
         return qty;
     }
 
     public void setQty(int qty) {
         this.qty = qty;
+        
+        total_price = qty*product_price;
     }
 
     public float getTotal_price() {
